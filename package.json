@@ -22,7 +22,7 @@
     "@angular/router": "~13.3.0",
     "apexcharts": "^5.3.4",
     "html2pdf.js": "^0.12.0",
-    "ng-apexcharts": "^2.0.1",
+    "ng-apexcharts": "^1.7.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",
