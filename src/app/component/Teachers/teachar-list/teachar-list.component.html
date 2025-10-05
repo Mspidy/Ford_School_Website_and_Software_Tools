@@ -1,0 +1,130 @@
+<div>
+  <div class="admission-banner">
+    <mat-icon class="banner-icon">campaign</mat-icon>
+    <span>
+      🧑‍🏫 Recruitment Open for Session {{ currentSession }} — Join Our Faculty & Inspire Futures!
+    </span>
+    <mat-icon class="banner-icon">campaign</mat-icon>
+  </div>
+
+  <div class="table-card-wrapper">
+    <!-- Table Header -->
+    <div class="table-header">
+      <h2>
+        List of All Teachers <mat-icon style="color: #0056b3">school</mat-icon>
+      </h2>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <button class="add-product-btn" (click)="addTeacher()">
+          + Add Teacher
+        </button>
+        <button class="import-excel-btn">
+          <mat-icon>upload_file</mat-icon> <span>Import Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="designationFilter">Designation</label>
+        <select
+          id="designationFilter"
+          [(ngModel)]="filters.designation"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let des of designationOptions" [value]="des">
+            {{ des }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="qualificationFilter">Qualification</label>
+        <select
+          id="qualificationFilter"
+          [(ngModel)]="filters.qualification"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let qual of qualificationOptions" [value]="qual">
+            {{ qual }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sessionFilter">Session</label>
+        <select
+          id="sessionFilter"
+          [(ngModel)]="filters.session"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let ses of sessionOptions" [value]="ses">
+            {{ ses }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-heading">
+        <span>
+          Teacher Details <mat-icon class="pointer-icon">touch_app</mat-icon>
+        </span>
+        <button class="download-excel-btn" (click)="downloadExcel()">
+          <mat-icon>cloud_download</mat-icon> Export Excel
+        </button>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th (click)="sortData('id')">ID</th>
+            <th (click)="sortData('name')">Name</th>
+            <th>Image</th>
+            <th (click)="sortData('designation')">Designation</th>
+            <th (click)="sortData('qualification')">Qualification</th>
+            <th (click)="sortData('joiningDate')">Joining Date</th>
+            <th (click)="sortData('session')">Session</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let teacher of sortedTeachers">
+            <td>{{ teacher.id }}</td>
+            <td>{{ teacher.name }}</td>
+            <td>
+              <img
+                [src]="'assets/' + teacher.image"
+                alt="{{ teacher.name }}"
+                class="student-image"
+              />
+            </td>
+            <td>{{ teacher.designation }}</td>
+            <td>{{ teacher.qualification }}</td>
+            <td>{{ teacher.joiningDate | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ teacher.session }}</td>
+            <td>
+              <label class="status-toggle">
+                <input
+                  type="checkbox"
+                  [checked]="teacher.status === 'active'"
+                  (change)="toggleStatus(teacher)"
+                />
+                <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        Showing {{ sortedTeachers.length }} teachers for session
+        {{ filters.session || currentSession }}
+      </div>
+    </div>
+  </div>
+</div>

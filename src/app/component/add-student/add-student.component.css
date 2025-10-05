@@ -1,0 +1,247 @@
+.admission-banner {
+  background: #218838;
+  color: #fff;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  flex-wrap: wrap;
+  animation: slideFade 0.8s ease-out;
+}
+
+/* Slide + Fade animation */
+@keyframes slideFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner-icon {
+  font-size: 22px;
+  color: #fff;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Pulse animation for icons */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+.add-product-form {
+  padding: 40px 20px;
+  max-width: 1600px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+.breadcrumb {
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.breadcrumb ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.breadcrumb li {
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li::after {
+  content: ">";
+  margin: 0 8px;
+  color: #999;
+}
+
+.breadcrumb li:last-child::after {
+  content: "";
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+
+.add-product-form h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Space between each row */
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Space between fields in a row */
+}
+
+.floating-group {
+  flex: 1 1 calc(33.33% - 20px); /* 3 items per row, accounting for gap */
+  min-width: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.floating-group.full-width {
+  flex: 1 1 100%;
+}
+
+/* Input, Select, Textarea */
+.floating-group input,
+.floating-group select,
+.floating-group textarea {
+  width: 100%;
+  padding: 16px 12px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-group input:focus,
+.floating-group select:focus,
+.floating-group textarea:focus {
+  border-color: #1e1e2f;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+/* Floating Labels */
+.floating-group label {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 15px;
+  color: #888;
+  pointer-events: none;
+  background: #fff;
+  padding: 0 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.floating-group input:focus + label,
+.floating-group input:not(:placeholder-shown) + label,
+.floating-group textarea:focus + label,
+.floating-group textarea:not(:placeholder-shown) + label,
+.floating-group select:focus + label,
+.floating-group select:valid + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  color: #1e1e2f;
+}
+
+/* Save Button */
+.save-btn {
+  padding: 12px 28px;
+  font-size: 16px;
+  background-color: #1e1e2f;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.save-btn:disabled {
+  background-color: #a0c1e1;
+  cursor: not-allowed;
+}
+
+.student-photo-upload {
+  margin-bottom: 30px;
+}
+
+.photo-box {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  line-height: 120px;
+  font-size: 14px;
+  color: #666;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-box:hover {
+  border-color: #007bff;
+  background-color: #eef6ff;
+  color: #007bff;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .floating-group {
+    min-width: 100%; /* Stack fields on smaller screens */
+  }
+
+  .add-product-form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-box {
+    width: 100px;
+    height: 100px;
+    font-size: 12px;
+    line-height: 100px;
+  }
+}

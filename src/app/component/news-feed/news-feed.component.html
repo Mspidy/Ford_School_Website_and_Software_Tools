@@ -1,0 +1,53 @@
+<div class="news-wrapper">
+  <!-- Header -->
+  <h2 class="news-title">
+    <mat-icon>campaign</mat-icon> News & Events
+  </h2>
+
+  <!-- Composer -->
+  <div class="composer">
+    <div class="composer-top">
+      <mat-icon class="avatar">account_circle</mat-icon>
+      <textarea [(ngModel)]="newPost.content" placeholder="Share an update..." rows="3"></textarea>
+    </div>
+
+    <div class="composer-tools">
+      <label for="imageUpload" class="upload-btn">
+        <mat-icon>image</mat-icon> Add Image
+      </label>
+      <input type="file" id="imageUpload" accept="image/*" (change)="handleImageUpload($event)" hidden />
+      <button mat-raised-button color="primary" (click)="submitPost()">Post</button>
+    </div>
+
+    <div class="image-preview" *ngIf="newPost.image">
+      <img [src]="newPost.image" alt="Preview" />
+      <button mat-icon-button (click)="removeImage()"><mat-icon>close</mat-icon></button>
+    </div>
+  </div>
+
+  <!-- Feed -->
+  <div class="news-feed">
+    <div class="news-card" *ngFor="let post of posts">
+      <div class="news-header">
+        <mat-icon class="avatar">account_circle</mat-icon>
+        <div class="meta">
+          <h4>{{ post.author }}</h4>
+          <span><mat-icon>calendar_today</mat-icon> {{ post.date | date:'mediumDate' }}</span>
+        </div>
+      </div>
+      <p class="content">{{ post.content }}</p>
+      <img
+  *ngIf="post.image"
+  [src]="post.image"
+  class="post-image"
+  (click)="openPreview(post.image)"
+/>
+
+      <div class="actions">
+        <button mat-button><mat-icon>thumb_up</mat-icon> Like</button>
+        <button mat-button><mat-icon>comment</mat-icon> Comment</button>
+        <button mat-button><mat-icon>share</mat-icon> Share</button>
+      </div>
+    </div>
+  </div>
+</div>

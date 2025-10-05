@@ -1,0 +1,113 @@
+<div class="dashboard-wrapper">
+  <!-- Title -->
+  <h1 class="dashboard-title"><mat-icon>dashboard</mat-icon> Ford School Dashboard</h1>
+
+  <!-- Metric Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card student">
+      <mat-icon>groups</mat-icon>
+      <h3>{{ totalStudents }}</h3>
+      <p>Total Students</p>
+    </div>
+    <div class="metric-card teacher">
+      <mat-icon>school</mat-icon>
+      <h3>{{ totalTeachers }}</h3>
+      <p>Total Teachers</p>
+    </div>
+    <div class="metric-card revenue">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <h3>₹{{ totalRevenue | number }}</h3>
+      <p>Yearly Revenue</p>
+    </div>
+    <div class="metric-card staff">
+      <mat-icon>badge</mat-icon>
+      <h3>{{ totalStaff }}</h3>
+      <p>Total Staff</p>
+    </div>
+  </div>
+
+  <!-- Dual Table Section -->
+  <div class="dual-table-section">
+    <!-- Student Table -->
+    <div class="table-box">
+      <h3 class="section-title">
+        <mat-icon>group</mat-icon> Class-wise Students
+      </h3>
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Section</th>
+            <th>Student Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of studentClassData">
+            <td>{{ entry.class }}</td>
+            <td>{{ entry.section }}</td>
+            <td>{{ entry.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Teacher Table -->
+    <div class="table-box">
+      <h3 class="section-title">
+        <mat-icon>person</mat-icon> Class-wise Teachers
+      </h3>
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Subject</th>
+            <th>Teacher Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let teacher of teacherClassData">
+            <td>{{ teacher.class }}</td>
+            <td>{{ teacher.subject }}</td>
+            <td>{{ teacher.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Holiday Table -->
+  <div class="holiday-section">
+  <h3 class="section-title">
+    <mat-icon>event</mat-icon> Holiday Calendar – US (2024)
+  </h3>
+
+  <table class="holiday-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Weekday</th>
+        <th>Occasion</th>
+        <th>Public</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let holiday of holidayList">
+        <td>{{ holiday.date | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ holiday.weekday.date.name }}</td>
+        <td>{{ holiday.name }}</td>
+        <td>
+          <span
+            [ngClass]="{
+              'public-tag': holiday.public,
+              'private-tag': !holiday.public
+            }"
+          >
+            {{ holiday.public ? 'Public' : 'Private' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

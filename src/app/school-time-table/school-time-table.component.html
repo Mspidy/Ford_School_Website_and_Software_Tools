@@ -1,0 +1,50 @@
+<div class="timetable-container">
+  <h2 class="section-title">
+    <mat-icon>view_week</mat-icon> School Time Table
+  </h2>
+
+  <button mat-raised-button color="primary" (click)="openTeacherConfig()" class="config-button">
+    <mat-icon>settings</mat-icon> Configure Teachers
+  </button>
+
+  <div class="table-wrapper">
+    <table class="timetable">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th *ngFor="let day of days">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let classItem of classes">
+          <tr class="class-row" (click)="toggleClass(classItem)">
+            <td [attr.colspan]="days.length + 1" class="class-header">
+              <mat-icon>{{ isExpanded(classItem) ? 'expand_less' : 'expand_more' }}</mat-icon>
+              {{ classItem }}
+            </td>
+          </tr>
+
+          <tr *ngIf="isExpanded(classItem)" class="expanded-row">
+            <td [attr.colspan]="days.length + 1">
+              <div class="timetable-grid">
+                <div class="day-column" *ngFor="let day of days">
+                  <h4>{{ day }}</h4>
+                  <div class="periods">
+                    <div *ngFor="let period of getPeriods(classItem, day)" class="period">
+                      <span class="subject">{{ period.subject }}</span>
+                      <span class="teacher">
+                        <mat-icon>person</mat-icon> {{ period.teacher }}
+                      </span>
+                      <span class="time">{{ period.time }}</span>
+                    </div>
+                    <div class="lunch" *ngIf="day === 'Monday'">🍱 Lunch Break: 11:00–11:40</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

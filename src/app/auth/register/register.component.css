@@ -1,0 +1,117 @@
+/* Same as login page styling with slight variations */
+.register-page-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .content-section {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: linear-gradient(135deg, #f9f5f1, #883d04); */
+    background: #254AA5;
+    padding: 60px 40px;
+  }
+  
+  .content-inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .content-image {
+    max-width: 300px;
+    margin-bottom: 30px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+  
+  .text-content h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  .text-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fff;
+  }
+  
+  .register-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #ffffff;
+  }
+  
+  .register-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-header {
+    font-size: 26px;
+    color: #2d3436;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .submit-btn:disabled {
+    background-color: #a0c1e1;
+    cursor: not-allowed;
+  }
+  
+  .submit-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+
+  .sign-in-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .sign-in-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .sign-in-link a:hover {
+    text-decoration: underline;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }

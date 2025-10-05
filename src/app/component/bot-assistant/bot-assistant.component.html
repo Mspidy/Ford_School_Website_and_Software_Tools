@@ -1,0 +1,25 @@
+<div class="chatbot-container" [class.open]="isOpen">
+    <!-- Floating Chat Button (when closed) -->
+    <button *ngIf="!isOpen" class="chatbot-fab" (click)="toggleBot()">🤖</button>
+  
+    <!-- Chat Window (when open) -->
+    <div class="chat-window" *ngIf="isOpen">
+      <!-- Header -->
+      <div class="chat-header">
+        <span class="bot-name">🤖 P-Bot</span>
+        <button class="chat-close-btn" (click)="toggleBot()">✖️</button>
+      </div>
+  
+      <!-- Chat Body -->
+      <div class="chat-body">
+        <div class="chat-message bot">Hi! 👋 How can I assist you today?</div>
+      </div>
+  
+      <!-- Footer -->
+      <div class="chat-footer">
+        <input type="text" placeholder="Type your message..." [(ngModel)]="userInput" (keyup.enter)="sendMessage()" />
+        <button class="send-btn" (click)="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+  

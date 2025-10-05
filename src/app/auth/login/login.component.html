@@ -1,0 +1,80 @@
+<div class="login-page-container">
+  <!-- Left Side (Content) -->
+  <!-- Left Side (Content) -->
+  <div class="content-section">
+    <div class="content-inner">
+      <img src="assets/logo.png" alt="Inventory Image" class="content-image" />
+      <div class="text-content">
+        <h1>Ford English School Management Portal</h1>
+        <p>
+          Introducing our all-in-one School Management Portal — designed to
+          streamline academic operations, enhance parent-teacher communication,
+          and simplify student data management. From admissions to attendance,
+          everything is just a click away. Sign in to experience seamless school
+          administration!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side (Login Form) -->
+  <div class="login-section">
+    <div class="home-link-wrapper">
+      <a routerLink="/" class="home-link">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+    </div>
+
+    <mat-card class="login-card">
+      <h2 class="login-header">Login</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field with Icon -->
+        <mat-form-field appearance="fill" class="input-field">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput formControlName="email" type="email" required />
+          <mat-error *ngIf="loginForm.get('email')?.invalid"
+            >Valid email required</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Password Field with Icon -->
+        <!-- Password Field with Show/Hide Icon -->
+        <mat-form-field appearance="fill" class="input-field">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            required
+          />
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">
+            {{ hidePassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+          <mat-error *ngIf="loginForm.get('password')?.invalid"
+            >Password is required</mat-error
+          >
+        </mat-form-field>
+
+        <div class="links-container">
+          <a href="#" (click)="onForgotPassword()">Forgot Password?</a>
+          <span> | </span>
+          <a routerLink="/register">Add New User</a>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loginForm.invalid"
+          class="submit-btn"
+        >
+          Login
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>
+<app-message-modal *ngIf="showSuccess"></app-message-modal>

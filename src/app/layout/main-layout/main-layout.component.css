@@ -1,0 +1,316 @@
+/* Layout Container */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+aside {
+  width: 260px;
+  /* background-color: #1e1e2f; */
+  /* background: linear-gradient(135deg, #735f4c, #160a00); */
+  background: #254aa5;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  transition: width 0.3s ease;
+  position: fixed; /* Keep sidebar fixed */
+  height: 100%; /* Full height */
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+/* Collapsed Sidebar */
+aside.collapsed {
+  width: 70px;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* User Info */
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.user-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-info p {
+  font-size: 14px;
+  color: white;
+  margin: 0;
+}
+
+.top-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.notification-btn,
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.notification-btn:hover,
+.logout-btn:hover {
+  background-color: #35354d;
+  border-radius: 20%;
+}
+
+/* Navigation Links */
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: background-color 0.2s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background-color: #23317c;
+}
+
+/* Collapse Button */
+.toggle-btn {
+  margin-top: auto;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  margin-left: 280px; /* To avoid content under the sidebar */
+  padding: 25px;
+  background-color: #f4f6f8;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease;
+  position: relative; /* Needed for layering */
+  z-index: 1;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px; /* Increased width */
+  height: 600px; /* Increased height */
+  background: url('/assets/logo2.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  main::before {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+
+
+/* Responsive: Collapse on mobile */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+  }
+
+  aside.collapsed {
+    width: 100%;
+  }
+
+  .user-info,
+  .nav-links,
+  .toggle-btn {
+    display: none;
+  }
+}
+
+/* Layout Container */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Main Content */
+/* main {
+  flex: 1;
+  padding: 25px;
+  background-color: #f4f6f8;
+  
+} */
+
+/* When Sidebar is collapsed, adjust the main content */
+main.collapsed-sidebar {
+  margin-left: 70px; /* Adjust main content width when sidebar is collapsed */
+}
+
+.app-footer {
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+/* Notification Badge (3 circles) */
+.notification-badge {
+  position: absolute;
+  top: 5%; /* Position the badge above the bell */
+  right: 80%; /* Adjust to the right to place the badge on top of the bell */
+  width: 18px; /* Slightly smaller size for the badge */
+  height: 18px; /* Same size for a round shape */
+  background-color: red;
+  color: white;
+  border-radius: 50%; /* Makes it a circle */
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Only this bell icon will animate */
+.bell-icon.ringing {
+  display: inline-block;
+  animation: ring 1s ease;
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0);
+  }
+  1% {
+    transform: rotate(30deg);
+  }
+  3% {
+    transform: rotate(-28deg);
+  }
+  5% {
+    transform: rotate(34deg);
+  }
+  7% {
+    transform: rotate(-32deg);
+  }
+  9% {
+    transform: rotate(30deg);
+  }
+  11% {
+    transform: rotate(-28deg);
+  }
+  13% {
+    transform: rotate(26deg);
+  }
+  15% {
+    transform: rotate(-24deg);
+  }
+  17% {
+    transform: rotate(22deg);
+  }
+  19% {
+    transform: rotate(-20deg);
+  }
+  21% {
+    transform: rotate(18deg);
+  }
+  23% {
+    transform: rotate(-16deg);
+  }
+  25% {
+    transform: rotate(14deg);
+  }
+  27% {
+    transform: rotate(-12deg);
+  }
+  29% {
+    transform: rotate(10deg);
+  }
+  31% {
+    transform: rotate(-8deg);
+  }
+  33% {
+    transform: rotate(6deg);
+  }
+  35% {
+    transform: rotate(-4deg);
+  }
+  37% {
+    transform: rotate(2deg);
+  }
+  39% {
+    transform: rotate(-1deg);
+  }
+  41% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.clock {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+  color: #fff;
+  text-align: center;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  margin: 4px 0;
+  transition: color 0.3s;
+}
+
+.copyright:hover {
+  color: #555;
+}

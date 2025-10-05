@@ -1,0 +1,230 @@
+<div class="fee-management-wrapper">
+  <h2 class="section-title">
+    <mat-icon>receipt_long</mat-icon> Fee Management
+  </h2>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search by name or roll no"
+    />
+    <select [(ngModel)]="selectedClass">
+      <option value="">All Classes</option>
+      <option *ngFor="let cls of classOptions" [value]="cls">{{ cls }}</option>
+    </select>
+    <button (click)="filterStudents()">Filter</button>
+  </div>
+
+  <div class="color-info-popup" *ngIf="showColorInfo">
+    <h4>Row Color Legend</h4>
+    <ul>
+      <li>
+        <span class="legend-box red"></span> More than 5 months Overdue →
+        <strong>Red</strong>
+      </li>
+      <li>
+        <span class="legend-box yellow"></span> Between 3–5 months Overdue →
+        <strong>Yellow</strong>
+      </li>
+      <li>
+        <span class="legend-box green"></span> Less than 1 month Overdue →
+        <strong>Green</strong>
+      </li>
+    </ul>
+  </div>
+
+  <div class="extra-fee-panel">
+    <button class="dropdown-toggle" (click)="toggleFeeDropdown()">
+      + Add Extra Fee
+    </button>
+    <div class="info-icon-wrapper" (click)="toggleColorInfo()">
+      <mat-icon class="info-icon">info</mat-icon>
+    </div>
+
+    <div class="fee-dropdown" *ngIf="showFeeDropdown">
+      <div class="table-heading">
+        <span
+          >2025-2026 Sessions
+          <mat-icon class="pointer-icon">touch_app</mat-icon></span
+        >
+      </div>
+      <table class="fee-dropdown-table">
+        <thead>
+          <tr>
+            <th>Fee Type</th>
+            <th>Amount</th>
+            <th>Month</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fee of globalExtraFees">
+            <td>
+              <label>
+                <input type="checkbox" [(ngModel)]="fee.selected" />
+                {{ fee.type }}
+              </label>
+            </td>
+            <td>₹{{ fee.amount }}</td>
+            <td>
+              <select [(ngModel)]="fee.month">
+                <option value="">Select Month</option>
+                <option *ngFor="let m of monthOptions" [value]="m">
+                  {{ m }}
+                </option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="apply-fee-btn" (click)="applyGlobalFees()">
+        Apply to All Students
+      </button>
+    </div>
+  </div>
+
+  <!-- Student Fee Table -->
+  <table class="fee-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Class</th>
+        <th>Start Date</th>
+        <th>Current Date</th>
+        <th>Calculated Fee</th>
+        <th>Paid</th>
+        <th>Due</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of filteredStudents">
+        <td>
+          <span
+            class="duration-spot"
+            [ngClass]="getDurationClass(student.startDate, student.currentDate)"
+          ></span>
+        </td>
+        <td>{{ student.rollNo }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.class }}</td>
+        <td>
+          <input type="date" [(ngModel)]="student.startDate" />
+        </td>
+        <td>
+          <input type="date" [(ngModel)]="student.currentDate" />
+        </td>
+        <td>
+          ₹{{
+            calculateFee(
+              student.startDate,
+              student.currentDate,
+              student.extraFees
+            )
+          }}
+        </td>
+        <td>₹{{ student.paid }}</td>
+        <td>
+          ₹{{
+            calculateFee(
+              student.startDate,
+              student.currentDate,
+              student.extraFees
+            ) - student.paid
+          }}
+        </td>
+
+        <td>
+          <button (click)="generateInvoice(student)">Generate Invoice</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Invoice Modal -->
+<div class="invoice-modal" *ngIf="selectedStudent">
+  <div class="invoice-box" id="invoiceContent">
+    <div class="invoice-header">
+      <h2>FORD English School</h2>
+      <p>Registration ID: FORD/REG/2025</p>
+      <p>Address: Civil Line Bada Bazar, Buxar, Bihar</p>
+      <p>Contact: +91-9876543210 | Email: info@fordschool.in</p>
+      <hr class="dotted-line" />
+    </div>
+
+    <div class="student-info">
+      <p><strong>Student Name:</strong> {{ selectedStudent.name }}</p>
+      <p><strong>Roll No:</strong> {{ selectedStudent.rollNo }}</p>
+      <p><strong>Class:</strong> {{ selectedStudent.class }}</p>
+      <p><strong>Session:</strong> {{ selectedStudent.session }}</p>
+      <p>
+        <strong>Start Date:</strong>
+        {{ selectedStudent.startDate | date : "dd-MM-yyyy" }}
+      </p>
+      <p>
+        <strong>End Date:</strong>
+        {{ selectedStudent.currentDate | date : "dd-MM-yyyy" }}
+      </p>
+      <p><strong>Invoice Date:</strong> {{ today | date : "dd-MM-yyyy" }}</p>
+      <hr class="dotted-line" />
+    </div>
+
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let month of selectedStudent.monthlyBreakdown">
+          <td>{{ month.name }}</td>
+          <td>
+            <div><strong>Base Fee:</strong> ₹{{ month.baseFee }}</div>
+            <div *ngIf="month.extraFees.length > 0">
+              <strong>Extras:</strong>
+              <ul>
+                <li *ngFor="let fee of month.extraFees">
+                  {{ fee.type }} (₹{{ fee.amount }})
+                </li>
+              </ul>
+            </div>
+            <div><strong>Total:</strong> ₹{{ month.total }}</div>
+          </td>
+        </tr>
+
+        <tr class="total-row">
+          <td><strong>Grand Total</strong></td>
+          <td>
+            <strong>₹{{ selectedStudent.calculatedFee }}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="invoice-footer">
+      <p>
+        <strong>Status:</strong>
+        {{
+          selectedStudent.calculatedFee === selectedStudent.paid
+            ? "Paid"
+            : "Due"
+        }}
+      </p>
+      <p><strong>Amount Paid:</strong> ₹{{ selectedStudent.paid }}</p>
+    </div>
+
+    <div class="modal-actions">
+      <button (click)="downloadPDF()">Download PDF</button>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showToast">
+  ✅ Successfully applied extra fees to all students!
+</div>

@@ -1,0 +1,329 @@
+<!-- Top Header -->
+<header class="school-header">
+  <div class="header-container">
+    <div class="school-logo">
+      <img src="assets/logo.png" alt="Ford English School Logo" />
+      <span>Ford English School</span>
+    </div>
+    <button class="admission-btn">🎓 Admissions Open 2025–26</button>
+
+    <div class="erp-access">
+      <a [routerLink]="'/login'" target="_blank" title="School ERP Login">
+        <i class="fas fa-user-lock"></i> ERP Login
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation Bar -->
+<nav class="school-navbar">
+  <ul class="nav-list">
+    <li><a href="#hero">Home</a></li>
+
+    <li class="dropdown">
+      <a href="#">About Us ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#about">Our Vision</a></li>
+        <li><a href="#about">Mission & Values</a></li>
+        <li><a href="#about">Leadership</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Facilities ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#facilities">Smart Classrooms</a></li>
+        <li><a href="#facilities">Transport</a></li>
+        <li><a href="#facilities">Sports</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#examination">Examination</a></li>
+    <li><a href="#fee">Online Fee Payment</a></li>
+
+    <li class="dropdown">
+      <a href="#">Gallery ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#gallery">Photos</a></li>
+        <li><a href="#gallery">Videos</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#">Help Desk ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#help">FAQs</a></li>
+        <li><a href="#help">Support</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#recruitment">Recruitment</a></li>
+  </ul>
+</nav>
+
+<section class="slider-notice-wrapper">
+  <!-- Left: Image Slider -->
+  <div class="slider-container">
+    <div class="slider">
+      <img [src]="images[currentSlide].url" alt="School Slide" />
+      <div class="caption-box">
+        {{ images[currentSlide].caption }}
+      </div>
+      <button class="nav left" (click)="prevSlide()">&#10094;</button>
+      <button class="nav right" (click)="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- Right: Notice Board -->
+  <div class="notice-container">
+    <h3 class="notice-heading">Notice Board</h3>
+    <div class="notice-scroll">
+      <ul>
+        <li *ngFor="let note of notices">
+          <span [ngClass]="{ 'new-notice': isRecent(note.date) }">
+            {{ note.text }}
+            <span *ngIf="isRecent(note.date)" class="new-flag">NEW</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="view-more">
+      <button>View More</button>
+    </div>
+  </div>
+</section>
+
+<section class="feature-cards">
+  <div class="card" (click)="navigate('gallery')">
+    <i class="fas fa-image"></i>
+    <h4>Photo Gallery</h4>
+  </div>
+
+  <div class="card" (click)="navigate('contact')">
+    <i class="fas fa-phone-alt"></i>
+    <h4>Contact Us</h4>
+  </div>
+
+  <div class="card" (click)="navigate('fee')">
+    <i class="fas fa-credit-card"></i>
+    <h4>Pay School Fee Online</h4>
+  </div>
+
+  <div class="card" (click)="navigate('staff')">
+    <i class="fas fa-users"></i>
+    <h4>Staff List</h4>
+  </div>
+
+  <div class="card" (click)="navigate('news')">
+    <i class="fas fa-newspaper"></i>
+    <h4>News & Events</h4>
+  </div>
+</section>
+
+<section class="latest-news">
+  <h2 class="news-heading">Latest News & Events</h2>
+  <div class="news-grid">
+    <div class="news-card" *ngFor="let item of news">
+      <img [src]="item.image" alt="News Image" />
+      <div class="news-content">
+        <h4>{{ item.title }}</h4>
+        <p>{{ item.summary }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="read-more">
+    <button>Read More News</button>
+  </div>
+</section>
+
+<section class="count-section">
+  <div class="count-card">
+    <div class="count-icon">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+    <h3>Total Registeration</h3>
+    <div class="counter" id="registerStudentCount">0</div>
+  </div>
+
+  <div class="count-card">
+    <div class="count-icon">
+      <i class="fas fa-user-graduate"></i>
+    </div>
+    <h3>Students Count</h3>
+    <div class="counter" id="studentCount">0</div>
+  </div>
+
+  <div class="count-card">
+    <div class="count-icon">
+      <i class="fas fa-chalkboard-teacher"></i>
+    </div>
+    <h3>Teachers Count</h3>
+    <div class="counter" id="teacherCount">0</div>
+  </div>
+
+  <div class="count-card">
+    <div class="count-icon">
+      <i class="fas fa-user-tie"></i>
+    </div>
+    <h3>Staff Count</h3>
+    <div class="counter" id="staffCount">0</div>
+  </div>
+</section>
+
+<section class="provide-section">
+  <h2 class="section-heading">What We Provide</h2>
+  <div class="provide-grid">
+    <div class="provide-card">
+      <i class="fas fa-bus-alt"></i>
+      <h4>Transport Service</h4>
+      <p>Safe and reliable school transport across all major routes.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-tshirt"></i>
+      <h4>School Dresses</h4>
+      <p>Neat and comfortable uniforms for all grades and seasons.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-book"></i>
+      <h4>Books & Stationery</h4>
+      <p>Curriculum-aligned books and learning materials for every class.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-desktop"></i>
+      <h4>Computer Lab</h4>
+      <p>Modern computer lab with high-speed internet and guided sessions.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <h4>Smart Classes</h4>
+      <p>Digital classrooms with projector and interactive learning tools.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-heartbeat"></i>
+      <h4>Health & Wellness</h4>
+      <p>Regular health checkups, mental wellness sessions, and emergency medical support for students.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-comments"></i>
+      <h4>Parent-Teacher Portal</h4>
+      <p>Stay connected with real-time updates on attendance, homework, and progress through our ERP system.</p>
+    </div>
+
+    <div class="provide-card">
+      <i class="fas fa-shield-alt"></i>
+      <h4>Campus Safety</h4>
+      <p>24×7 CCTV surveillance, verified transport staff, and secure entry protocols for student safety.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="message-section">
+  <!-- Director Message -->
+  <div class="message-card">
+    <img src="assets/director.jpg" alt="Director" />
+    <div class="message-content">
+      <h3>Director's Message</h3>
+      <h4 class="profile-name">Mr. Mohan Kumar Dubey <span>— M.A, Polytical Science</span></h4>
+      <p class="message-text" id="directorMessage">
+        Our vision is to empower every child with knowledge, values, and
+        confidence to lead tomorrow. We believe in nurturing curiosity and
+        creativity through a safe and inclusive environment...
+      </p>
+      <button onclick="toggleMessage('directorMessage')">Read More</button>
+    </div>
+  </div>
+
+  <!-- Principal Message -->
+  <div class="message-card">
+    <img src="assets/userimage.jpg" alt="Principal" />
+    <div class="message-content">
+      <h3>Principal's Message</h3>
+      <h4 class="profile-name">Mr. Vinod Sharma <span>— M.A, B.Ed</span></h4>
+      <p class="message-text" id="principalMessage">
+        At Ford English School, we strive to build a foundation of excellence.
+        Our students are encouraged to explore, question, and grow into
+        responsible citizens. Education is not just about books...
+      </p>
+      <button onclick="toggleMessage('principalMessage')">Read More</button>
+    </div>
+  </div>
+</section>
+
+<footer class="school-footer">
+  <div class="footer-top">
+    <!-- Left Section -->
+    <div class="footer-left">
+      <h3>Ford English School</h3>
+      <p><i class="fas fa-phone-alt"></i> +91 9431099886</p>
+      <p><i class="fas fa-envelope"></i> info@fordschool.in</p>
+
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <ul class="footer-nav">
+        <li>
+          <a href="#hero"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+        </li>
+        <li>
+          <a href="#facilities"><i class="fas fa-school"></i> Facilities</a>
+        </li>
+        <li>
+          <a href="#examination"><i class="fas fa-file-alt"></i> Examination</a>
+        </li>
+        <li>
+          <a href="#fee"><i class="fas fa-credit-card"></i> Fee Payment</a>
+        </li>
+        <li>
+          <a href="#gallery"><i class="fas fa-images"></i> Gallery</a>
+        </li>
+        <li>
+          <a href="#help"><i class="fas fa-question-circle"></i> Help Desk</a>
+        </li>
+        <li>
+          <a href="#recruitment"
+            ><i class="fas fa-user-plus"></i> Recruitment</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Section -->
+    <div class="footer-right">
+      <h4><i class="fas fa-map-marker-alt"></i> School Location</h4>
+      <p>
+        Ford English School<br />Buxar, Bihar – 802101<br />Rajpur Dadura, Near Harpur
+      </p>
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.123456789!2d84.123456!3d25.567890!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397123456789abcd%3A0xabcdef1234567890!2sFord%20English%20School%2C%20Buxar%2C%20Bihar!5e0!3m2!1sen!2sin!4v1696501234567"
+          width="100%"
+          height="180"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Center -->
+  <div class="footer-bottom">
+    <p>
+      &copy; 2025–26 <strong>Ford English School</strong>. All rights reserved.
+    </p>
+  </div>
+</footer>

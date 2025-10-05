@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>🧑‍🏫 Assign Teachers to Classes</h2>
+<mat-dialog-content class="dialog-body">
+  <div class="teacher-pool">
+    <h3>Available Teachers</h3>
+    <div
+      class="teacher-card"
+      *ngFor="let teacher of teachers"
+      cdkDrag
+      [cdkDragData]="teacher"
+    >
+      {{ teacher.name }} <span class="slot">{{ teacher.slot }}</span>
+    </div>
+  </div>
+
+  <div class="class-grid">
+    <div *ngFor="let classItem of classes" class="class-block">
+      <h4>{{ classItem }}</h4>
+      <div *ngFor="let subject of subjects" class="subject-cell" cdkDropList [cdkDropListData]="[]" (cdkDropListDropped)="assignTeacher($event, classItem, subject)">
+        <span class="label">{{ subject }}</span>
+        <div class="assigned" *ngIf="teacherMap[classItem]?.[subject]">
+          {{ teacherMap[classItem][subject].name }} <span class="slot">{{ teacherMap[classItem][subject].slot }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</mat-dialog-actions>

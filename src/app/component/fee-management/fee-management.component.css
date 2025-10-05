@@ -1,0 +1,495 @@
+.fee-management-wrapper {
+  padding: 40px;
+  background-color: #f9fbfc;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0056b3;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  min-width: 200px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  animation: fadeInTable 0.6s ease-in-out;
+}
+
+@keyframes fadeInTable {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fee-table th {
+  background-color: #0056b3;
+  color: white;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.fee-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #444;
+}
+
+.fee-table tr:hover {
+  background-color: #f1f8ff;
+}
+
+.fee-table input[type="date"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.fee-table input[type="date"]:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.fee-table button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s ease;
+}
+
+.fee-table button:hover {
+  background-color: #218838;
+}
+
+.fee-table tbody tr {
+  animation: slideInRow 0.4s ease forwards;
+  opacity: 0;
+}
+
+.fee-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.fee-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.fee-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+/* Add more delays as needed */
+
+@keyframes slideInRow {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+.invoice-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px; /* for spacing on small screens */
+  box-sizing: border-box;
+}
+
+.invoice-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 700px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+.invoice-header h2 {
+  color: #0056b3;
+  margin-bottom: 4px;
+}
+
+.invoice-header p {
+  font-size: 13px;
+  margin: 2px 0;
+  color: #555;
+}
+
+.dotted-line {
+  border-top: 1px dotted #aaa;
+  margin: 12px 0;
+}
+
+.student-info p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  padding: 10px;
+  border-bottom: 1px dotted #ccc;
+  text-align: left;
+}
+
+.invoice-table th {
+  background-color: #0056b3;
+  color: white;
+  font-weight: 600;
+}
+
+.total-row td {
+  background-color: #f1f8ff;
+  font-weight: 600;
+}
+
+.invoice-footer p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-actions button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal-actions button:hover {
+  background-color: #004494;
+}
+
+
+.extra-fee-panel {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+}
+
+
+
+.dropdown-toggle {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fee-dropdown {
+  position: absolute;
+  top: calc(100% + 8px); /* 8px spacing below button */
+  left: 0;
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: dropdownFade 0.3s ease-out;
+}
+
+
+
+
+
+@keyframes dropdownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.fee-dropdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+.fee-dropdown-table th,
+.fee-dropdown-table td {
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.fee-dropdown-table input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.fee-dropdown-table select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  background-color: #fff;
+}
+
+.apply-fee-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.invoice-table ul {
+  margin: 4px 0;
+  padding-left: 16px;
+}
+
+.invoice-table li {
+  font-size: 13px;
+  color: #444;
+}
+
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e0e6ed;
+  background-color: #0056b3;
+  border-radius: 6px;
+}
+
+
+.filter-bar button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-bar button:hover {
+  background-color: #004494;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.duration-spot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 4px;
+  background-color: #ccc;
+}
+
+.duration-red {
+  background-color: #ff4d4d;
+}
+
+.duration-yellow {
+  background-color: #ffd633;
+}
+
+.duration-green {
+  background-color: #4cd964;
+}
+
+
+
+.info-icon-wrapper {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.info-icon {
+  font-size: 20px;
+  color: #0056b3;
+  transition: transform 0.2s ease;
+}
+
+.info-icon:hover {
+  transform: scale(1.1);
+}
+
+.color-info-popup {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 90vw;
+  min-width: 240px;
+  width: fit-content;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.color-info-popup h4 {
+  margin-top: 0;
+  font-size: 15px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.color-info-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-info-popup li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.legend-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 8px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-box.red {
+  background-color: #ff4d4d;
+}
+
+.legend-box.yellow {
+  background-color: #ffd633;
+}
+
+.legend-box.green {
+  background-color: #4cd964;
+}
+
+@media (max-width: 600px) {
+  .color-info-popup {
+    top: auto;
+    bottom: 20px;
+    right: 10px;
+    left: 10px;
+  }
+}

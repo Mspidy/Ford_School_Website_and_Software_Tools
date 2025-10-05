@@ -1,0 +1,80 @@
+<div class="transport-wrapper">
+  <h2 class="section-title">
+    <mat-icon>local_shipping</mat-icon> Transport Management
+  </h2>
+
+  <table class="transport-table">
+    <thead>
+      <tr>
+        <th>Vehicle No</th>
+        <th>Type</th>
+        <th>Driver</th>
+        <th>Route</th>
+        <th>Daily KM</th>
+        <th>Fuel Type</th>
+        <th>Monthly KM</th>
+        <th>Fuel Used</th>
+        <th>Fuel Cost</th>
+        <th>Maintenance</th>
+        <th>Total Cost</th>
+        <th>Invoice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td>{{ vehicle.number }}</td>
+        <td>{{ vehicle.type }}</td>
+        <td>{{ vehicle.driver.name }}</td>
+        <td>{{ vehicle.route }}</td>
+        <td>{{ vehicle.dailyKm }}</td>
+        <td>{{ vehicle.fuelType }}</td>
+        <td>{{ vehicle.dailyKm * 30 }}</td>
+        <td>{{ vehicle.monthlyFuelLitres }} L</td>
+        <td>₹{{ vehicle.fuelCost }}</td>
+        <td>₹{{ vehicle.maintenanceCost }}</td>
+        <td><strong>₹{{ vehicle.totalMonthlyCost }}</strong></td>
+        <td>
+          <button (click)="openInvoice(vehicle)">Generate</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Invoice Modal -->
+  <div class="invoice-modal" *ngIf="selectedVehicle">
+    <div class="invoice-box" id="transportInvoice">
+      <h3>Transport Invoice – {{ selectedVehicle.number }}</h3>
+      <p><strong>Driver:</strong> {{ selectedVehicle.driver.name }}</p>
+      <p><strong>Route:</strong> {{ selectedVehicle.route }}</p>
+      <hr class="dotted-line" />
+
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Total KM</th>
+            <th>Fuel Used</th>
+            <th>Fuel Cost</th>
+            <th>Maintenance</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ currentMonth }}</td>
+            <td>{{ selectedVehicle.dailyKm * 30 }}</td>
+            <td>{{ selectedVehicle.monthlyFuelLitres }} L</td>
+            <td>₹{{ selectedVehicle.fuelCost }}</td>
+            <td>₹{{ selectedVehicle.maintenanceCost }}</td>
+            <td><strong>₹{{ selectedVehicle.totalMonthlyCost }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="modal-actions">
+        <button (click)="downloadTransportPDF()">Download PDF</button>
+        <button (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

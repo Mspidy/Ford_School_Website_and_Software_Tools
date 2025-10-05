@@ -1,0 +1,236 @@
+<div>
+  <div class="admission-banner">
+    <mat-icon class="banner-icon">campaign</mat-icon>
+    <span>
+      🎓 Admission Open for Session {{ currentSession }} — Enroll Now & Shape
+      Your Future!
+    </span>
+    <mat-icon class="banner-icon">campaign</mat-icon>
+  </div>
+
+  <div class="table-card-wrapper">
+    <!-- Table Header -->
+    <div class="table-header">
+      <h2>
+        List of All Students <mat-icon style="color: #0056b3">groups</mat-icon>
+      </h2>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <button class="add-product-btn" (click)="addStudent()">
+          + Add Student
+        </button>
+        <button class="import-excel-btn">
+          <mat-icon>upload_file</mat-icon> <span>Import Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="classFilter">Class</label>
+        <select
+          id="classFilter"
+          [(ngModel)]="filters.class"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let cls of classOptions" [value]="cls">
+            {{ cls }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sectionFilter">Section</label>
+        <select
+          id="sectionFilter"
+          [(ngModel)]="filters.section"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let sec of sectionOptions" [value]="sec">
+            {{ sec }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sessionFilter">Session</label>
+        <select
+          id="sessionFilter"
+          [(ngModel)]="filters.session"
+          (change)="applyFilters()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let ses of sessionOptions" [value]="ses">
+            {{ ses }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-heading">
+        <span
+          >Student Details
+          <mat-icon class="pointer-icon">touch_app</mat-icon></span
+        >
+        <button class="download-excel-btn" (click)="downloadExcel()">
+          <mat-icon>cloud_download</mat-icon> Export Excel
+        </button>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th (click)="sortData('rollNo')">
+              Roll No
+              <span
+                *ngIf="currentSortColumn === 'rollNo'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('name')">
+              Name
+              <span
+                *ngIf="currentSortColumn === 'name'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+            <th>Image</th>
+
+            <th (click)="sortData('class')">
+              Class
+              <span
+                *ngIf="currentSortColumn === 'class'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('section')">
+              Section
+              <span
+                *ngIf="currentSortColumn === 'section'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('fatherName')">
+              Father Name
+              <span
+                *ngIf="currentSortColumn === 'fatherName'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+            <th (click)="sortData('motherName')">
+              Mother Name
+              <span
+                *ngIf="currentSortColumn === 'motherName'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('session')">
+              Session
+              <span
+                *ngIf="currentSortColumn === 'session'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('dob')">
+              DOB
+              <span
+                *ngIf="currentSortColumn === 'dob'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th (click)="sortData('gender')">
+              Gender
+              <span
+                *ngIf="currentSortColumn === 'gender'"
+                class="sort-icon"
+                [ngClass]="{
+                  asc: sortDirection === 'asc',
+                  desc: sortDirection === 'desc'
+                }"
+              ></span>
+            </th>
+
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of sortedStudents">
+            <td>{{ student.rollNo }}</td>
+            <td>{{ student.name }}</td>
+            <td>
+              <img
+                [src]="'assets/' + student.image"
+                alt="{{ student.name }}"
+                class="student-image"
+              />
+            </td>
+
+            <td>{{ student.class }}</td>
+            <td>{{ student.section }}</td>
+            <td>{{ student.fatherName }}</td>
+            <td>{{ student.motherName }}</td>
+            <td>{{ student.session }}</td>
+            <td>{{ student.dob | date : "dd-MM-yyyy" }}</td>
+            <td>{{ student.gender }}</td>
+            <td>
+              <label class="status-toggle">
+                <input
+                  type="checkbox"
+                  [checked]="student.status === 'active'"
+                  (change)="toggleStatus(student)"
+                />
+                <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer">
+        Showing {{ sortedStudents.length }} students for session
+        {{ filters.session || currentSession }}
+      </div>
+    </div>
+  </div>
+</div>

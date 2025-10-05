@@ -1,0 +1,102 @@
+<div class="layout">
+  <!-- Sidebar -->
+  <aside [class.collapsed]="isCollapsed">
+    <div class="top-section">
+      <!-- Notification Bell and Logout Button -->
+      <div class="top-icons">
+        <button
+          mat-raised-button
+          matBadge="8"
+          matBadgePosition="after"
+          matBadgeColor="warn"
+          class="notification-btn"
+          (click)="onNotificationsClick()"
+        >
+          <!-- Bell icon wrapped separately -->
+          <span #bellIcon class="bell-icon">🔔</span>
+        </button>
+
+        <button class="logout-btn" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+
+      <!-- User Info -->
+      <div class="user-info">
+        <img src="assets/logo.png" alt="User Avatar" />
+        <div *ngIf="!isCollapsed">
+          <p>Ford English School</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/main/profile" routerLinkActive="active"
+        ><span><mat-icon>person</mat-icon></span>
+        <span *ngIf="!isCollapsed">Profile</span></a
+      >
+      <a routerLink="/main/dashboard" routerLinkActive="active"
+        ><span><mat-icon>dashboard</mat-icon></span>
+        <span *ngIf="!isCollapsed">Dashboard</span></a
+      >
+      <a routerLink="/main/student-list" routerLinkActive="active"
+        ><span><mat-icon>person</mat-icon></span>
+        <span *ngIf="!isCollapsed">Student Management</span></a
+      >
+      <a routerLink="/main/teacher-list" routerLinkActive="active"
+        ><span><mat-icon>person</mat-icon></span>
+        <span *ngIf="!isCollapsed">Teachers</span></a
+      >
+      <a routerLink="/main/fee-management" routerLinkActive="active"
+        ><span><mat-icon>receipt_long</mat-icon></span>
+        <span *ngIf="!isCollapsed">Fee Management</span></a
+      >
+      <a
+        routerLink="/main/transport-management"
+        routerLinkActive="active"
+        class="sidebar-link"
+      >
+        <span class="icon-wrapper">
+          <mat-icon>local_shipping</mat-icon>
+        </span>
+        <span class="link-label" *ngIf="!isCollapsed"
+          >Transport Management</span
+        >
+      </a>
+
+      <a routerLink="/main/inventory" routerLinkActive="active">
+        <span><mat-icon>inventory_2</mat-icon></span>
+        <span *ngIf="!isCollapsed">School Inventory</span>
+      </a>
+
+      <a
+        routerLink="/main/timetable"
+        routerLinkActive="active"
+        matTooltip="School Time Table"
+      >
+        <span><mat-icon>calendar_today</mat-icon></span>
+        <span *ngIf="!isCollapsed">School Time Table</span>
+      </a>
+
+      <a routerLink="/main/news-feed" routerLinkActive="active"
+        ><span><mat-icon>dynamic_feed</mat-icon> </span>
+        <span *ngIf="!isCollapsed">News Feed</span></a
+      >
+    </nav>
+
+    <button class="toggle-btn" (click)="toggleCollapse()">
+      {{ isCollapsed ? "➡️" : "⬅️" }}
+    </button>
+    <p class="copyright">© prabhatmark2025</p>
+    <p class="clock">{{ currentTime }}</p>
+  </aside>
+
+  <!-- Main Content -->
+
+  <main [class.collapsed-sidebar]="isCollapsed">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Logout Modal Component -->
+  <app-logout-modal (logoutConfirmed)="logout()"></app-logout-modal>
+</div>

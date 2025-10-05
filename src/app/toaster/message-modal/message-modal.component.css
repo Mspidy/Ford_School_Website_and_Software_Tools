@@ -1,0 +1,63 @@
+.success-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .success-modal {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    text-align: center;
+    animation: popupFade 0.4s ease-out;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .checkmark-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .checkmark-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #4caf50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: bounce 0.6s ease;
+  }
+  
+  .checkmark {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  @keyframes popupFade {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bounce {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    80% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+  

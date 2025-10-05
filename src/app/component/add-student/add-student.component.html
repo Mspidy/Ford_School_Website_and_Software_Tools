@@ -1,0 +1,144 @@
+<div class="add-student-form">
+  <div class="admission-banner">
+    <mat-icon class="banner-icon">campaign</mat-icon>
+    <span>
+      🎓 Admission Open for Session 2025-2026 — Enroll Now & Shape
+      Your Future!
+    </span>
+    <mat-icon class="banner-icon">campaign</mat-icon>
+  </div>
+  <h2>Add New Student</h2>
+
+  <!-- 📷 Student Photo Upload Box -->
+  <div class="student-photo-upload">
+    <label for="photoUpload" class="photo-box">
+      <ng-container *ngIf="photoPreviewUrl; else placeholder">
+        <img [src]="photoPreviewUrl" alt="Student Photo" />
+      </ng-container>
+      <ng-template #placeholder>
+        <span>📷 Upload Photo</span>
+      </ng-template>
+    </label>
+    <input type="file" id="photoUpload" (change)="onPhotoSelected($event)" hidden />
+  </div>
+
+  <!-- 🧭 Breadcrumb -->
+  <nav class="breadcrumb">
+    <ul>
+      <li><mat-icon routerLink=''>home</mat-icon></li>
+      <li><a routerLink="/main/student-list">Students</a></li>
+      <li>Add Student</li>
+    </ul>
+  </nav>
+
+  <!-- 📝 Form -->
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <!-- Row 1 -->
+    <div class="form-row">
+      <div class="floating-group">
+        <input type="text" id="rollNo" formControlName="rollNo" placeholder=" " />
+        <label for="rollNo">Roll Number</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="name" formControlName="name" placeholder=" " required />
+        <label for="name">Full Name</label>
+      </div>
+
+      <div class="floating-group">
+        <select id="class" formControlName="class" required>
+          <option value="" disabled selected hidden></option>
+          <option *ngFor="let cls of classOptions" [value]="cls">{{ cls }}</option>
+        </select>
+        <label for="class">Class</label>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="form-row">
+      <div class="floating-group">
+        <select id="section" formControlName="section" required>
+          <option value="" disabled selected hidden></option>
+          <option *ngFor="let sec of sectionOptions" [value]="sec">{{ sec }}</option>
+        </select>
+        <label for="section">Section</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="date" id="dob" formControlName="dob" placeholder=" " required />
+        <label for="dob">Date of Birth</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="gender" formControlName="gender" placeholder=" " />
+        <label for="gender">Gender</label>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="form-row">
+      <div class="floating-group">
+        <input type="text" id="fatherName" formControlName="fatherName" placeholder=" " />
+        <label for="fatherName">Father's Name</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="motherName" formControlName="motherName" placeholder=" " />
+        <label for="motherName">Mother's Name</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="guardianContact" formControlName="guardianContact" placeholder=" " />
+        <label for="guardianContact">Guardian Contact</label>
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="form-row">
+      <div class="floating-group">
+        <input type="text" id="address" formControlName="address" placeholder=" " />
+        <label for="address">Address</label>
+      </div>
+
+      <div class="floating-group">
+        <select id="status" formControlName="status" required>
+          <option value="" disabled selected hidden></option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="form-row">
+      <div class="floating-group">
+        <input type="text" id="admissionDate" formControlName="admissionDate" placeholder=" " />
+        <label for="admissionDate">Admission Date</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="bloodGroup" formControlName="bloodGroup" placeholder=" " />
+        <label for="bloodGroup">Blood Group</label>
+      </div>
+
+      <div class="floating-group">
+        <input type="text" id="nationality" formControlName="nationality" placeholder=" " />
+        <label for="nationality">Nationality</label>
+      </div>
+    </div>
+
+    <!-- Row 6 -->
+    <div class="form-row">
+      <div class="floating-group full-width">
+        <textarea id="notes" rows="3" formControlName="notes" placeholder=" "></textarea>
+        <label for="notes">Additional Notes</label>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="form-row">
+      <button type="submit" class="save-btn" [disabled]="studentForm.invalid">💾 Save Student</button>
+    </div>
+  </form>
+</div>
