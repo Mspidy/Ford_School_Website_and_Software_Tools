@@ -26,6 +26,34 @@ export class HomeComponent implements OnInit {
       url: 'assets/gallary12.jpg',
       caption: 'New Computer Lab Inauguration',
     },
+    {
+      url: 'assets/a1.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a2.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a3.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a4.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a5.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a6.png',
+      caption: '',
+    },
+    {
+      url: 'assets/a7.png',
+      caption: '',
+    },
   ];
 
   currentSlide = 0;
@@ -74,19 +102,19 @@ export class HomeComponent implements OnInit {
       title: 'Annual Sports Day Held Successfully',
       summary:
         'Students from all grades participated in inter-house competitions with great enthusiasm.',
-      image: 'assets/news4.jpg',
+      image: 'assets/news7.png',
     },
     {
       title: 'Digital Literacy Workshop for Class 6–10',
       summary:
         'Hands-on training on basic computer skills and internet safety was conducted last week.',
-      image: 'assets/news4.jpg',
+      image: 'assets/news8.png',
     },
     {
       title: 'New Library Block Inaugurated',
       summary:
         'The school opened a new library with over 2,000 books and digital reading stations.',
-      image: 'assets/news4.jpg',
+      image: 'assets/news6.png',
     },
   ];
 
